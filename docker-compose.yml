@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: npm start
+    volumes:
+      - ./public:/src/public
+    ports:
+      - 127.0.0.1:8898:8898
+    environment:
+      - PORT=8898
