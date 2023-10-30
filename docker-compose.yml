@@ -1,8 +1,9 @@
-version: '3'
+version: '2'
 
 services:
   web:
     build: .
+    container_name: image-server
     command: npm start
     volumes:
       - ./public:/src/public
