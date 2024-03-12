@@ -21,11 +21,13 @@ app.get("/", (req, res) => {
 
 // Not found
 app.use((req, res, next) => {
+	res.removeHeader("Cache-Control");
 	res.status(404).end();
 });
 
 // Error
 app.use((err, req, res, next) => {
+	res.removeHeader("Cache-Control");
 	console.error(err.stack);
 	res.sendStatus(500);
 });
