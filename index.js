@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 
 // Not found
 app.use((req, res, next) => {
-	res.set("Cache-Control", "public, max-age=0");
+	res.removeHeader("Cache-Control");
 	res.status(404).end();
 });
 
