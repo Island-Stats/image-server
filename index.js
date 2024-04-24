@@ -1,23 +1,26 @@
 const express = require("express");
 const path = require("path");
+const serveIndex = require("serve-index");
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.disable("x-powered-by");
 
-// Cache images for 1 day
-app.use(function (req, res, next) {
-	res.set("Cache-Control", "public, max-age=86400");
-	next();
-});
-
-// Serve images
-app.use(express.static("public"));
-
 // Send docs
 app.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "/index.html"));
 });
+
+// Serve images
+app.use(
+	express.static("public", {
+		dotfiles: "deny",
+		cacheControl: true,
+		maxAge: "1d",
+		lastModified: false,
+	}),
+	serveIndex("public", { icons: true, view: "tiles" })
+);
 
 // Not found
 app.use((req, res, next) => {
