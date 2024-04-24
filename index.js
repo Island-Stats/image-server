@@ -6,6 +6,16 @@ const port = process.env.PORT || 3000;
 
 app.disable("x-powered-by");
 
+// Cache control
+app.use((req, res, next) => {
+	if (!req.url.endsWith(".png")) {
+		res.set("Cache-Control", "public, max-age=0");
+	} else {
+		res.set("Cache-Control", "public, max-age=86400");
+	}
+	next();
+});
+
 // Send docs
 app.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "/index.html"));
@@ -15,8 +25,6 @@ app.get("/", (req, res) => {
 app.use(
 	express.static("public", {
 		dotfiles: "deny",
-		cacheControl: true,
-		maxAge: "1d",
 		lastModified: false,
 	}),
 	serveIndex("public", { icons: true, view: "tiles" })
