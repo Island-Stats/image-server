@@ -16,6 +16,11 @@ app.use((req, res, next) => {
 	next();
 });
 
+// Discord
+app.get("/discord", (req, res) => {
+	res.redirect("https://discord.gg/rwCnzXQMUB");
+});
+
 // Serve images
 app.use(
 	express.static("public", {
