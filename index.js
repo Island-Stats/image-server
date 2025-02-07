@@ -16,11 +16,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-// Send docs
-app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "/index.html"));
-});
-
 // Serve images
 app.use(
 	express.static("public", {
