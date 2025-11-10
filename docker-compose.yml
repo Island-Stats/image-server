@@ -6,7 +6,7 @@ services:
     container_name: image-server
     command: npm start
     volumes:
-      - /var/www/cdn-island-stats/public:/src/public
+      - ./public:/src/public
     ports:
       - 127.0.0.1:8898:8898
     environment:
